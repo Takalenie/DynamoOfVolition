@@ -9,12 +9,12 @@ class DynamicScope(abc.Mapping):
         self.env: Dict[str, Optional[Any]] = {}
 
     def __getitem__(self, key: str) -> Optional[Any]:
-        return self.env.__getitem__(key)
-
-    def __setitem__(self, key: str, value: Optional[Any]):
         # checks if the key exists
         if not key in self.env:
             raise NameError(f"Key '{key}' does not exist")
+        return self.env.__getitem__(key)
+
+    def __setitem__(self, key: str, value: Optional[Any]):
         self.env.__setitem__(key, value)
 
     def __delitem__(self, key: str):
