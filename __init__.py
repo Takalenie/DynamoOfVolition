@@ -3,19 +3,18 @@ from collections import abc
 from types import FunctionType
 import inspect
 
-
-class DynamicScope(abc.MutableMapping):
+class DynamicScope(abc.Mapping):
     def __init__(self, data: Dict[str, Any]):
         self.env: Dict[str, Optional[Any]] = {}
 
     def __getitem__(self, key: str) -> Optional[Any]:
         return self.env.__getitem__(key)
 
-    def __setitem__(self, key: str, value: Optional[key]) -> Optional[Any]:
-        return self.env.__setitem__(key, value)
+    def __setitem__(self, key: str, value: Optional[Any]):
+        self.env.__setitem__(key, value)
 
-    def __delitem__(self, key: str) -> Optional[Any]:
-        return self.env.__delitem__(key)
+    def __delitem__(self, key: str):
+        self.env.__delitem__(key)
 
     def __iter__(self) -> Iterator[str]:
         return self.env.__iter__()
