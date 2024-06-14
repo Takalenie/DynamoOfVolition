@@ -4,6 +4,7 @@ from types import FunctionType
 import inspect
 
 class DynamicScope(abc.Mapping):
+    # allows for dicionary functionality
     def __init__(self):
         self.env: Dict[str, Optional[Any]] = {}
 
@@ -11,6 +12,9 @@ class DynamicScope(abc.Mapping):
         return self.env.__getitem__(key)
 
     def __setitem__(self, key: str, value: Optional[Any]):
+        # checks if the key exists
+        if not key in self.env:
+            raise NameError(f"Key '{key}' does not exist")
         self.env.__setitem__(key, value)
 
     def __delitem__(self, key: str):
@@ -21,6 +25,7 @@ class DynamicScope(abc.Mapping):
 
     def __len__(self) -> int:
         return self.env.__len__()
+
 
 def get_dynamic_re() -> DynamicScope:
     environment = DynamicScope()
