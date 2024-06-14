@@ -34,7 +34,7 @@ def get_dynamic_re() -> DynamicScope:
         fObject = stack[i][0]
         for variable in fObject.f_locals:
             # skipping instances of variable previously saved, null variables, and free variables
-            if variable in environment.env or fObject.f_locals[j] is None or variable in fObject.f_code.co_freevars:
+            if variable in environment.env or fObject.f_locals[variable] is None or variable in fObject.f_code.co_freevars:
                 continue 
             environment[variable] = fObject.f_locals[variable]
     return environment
