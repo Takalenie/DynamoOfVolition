@@ -4,7 +4,7 @@ from types import FunctionType
 import inspect
 
 class DynamicScope(abc.Mapping):
-    def __init__(self, data: Dict[str, Any]):
+    def __init__(self):
         self.env: Dict[str, Optional[Any]] = {}
 
     def __getitem__(self, key: str) -> Optional[Any]:
